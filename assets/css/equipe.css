@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+.racing-sans-one-regular {
+  font-family: "Racing Sans One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+/* Variáveis de Cores (Consistência com cinza claro e branco) */
+:root {
+    --primary-color: #343a40; /* Cinza Escuro */
+    --secondary-color: #f8f9fa; /* Cinza Claro para Fundo (Usei branco no corpo para contraste) */
+    --background-color: #ffffff; /* Branco Puro */
+    --text-muted: #6c757d; /* Cinza para textos secundários */
+}
+
+body{
+background-color: #e9e9e9;
+}
+
+h2{
+    font-family: "Racing Sans One", sans-serif;
+}
+/* Fundo da Seção de Equipe */
+#nossa-equipe {
+     margin-top: 17vh;
+    height: 100%;
+}
+
+/* Cartão do Integrante: Transições e Sombra (Efeito Elevado) */
+.team-member {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-radius: 0.75rem !important; 
+    border: 1px solid #e9ecef !important; 
+}
+
+.team-member:hover {
+    transform: translateY(-5px); /* Move o cartão ligeiramente para cima */
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.1) !important; /* Sombra mais destacada */
+}
+
+/* Contêiner da Foto: Garante que a imagem se ajuste e o efeito de zoom não "estoure" */
+.team-photo {
+    width: 100px;
+    height: 100px;
+    border: 3px solid #dee2e6; /* Borda cinza suave */
+    overflow: hidden; /* CRUCIAL: Esconde o excesso da imagem durante o zoom */
+    border-radius: 50%;
+    
+    /* Para centralizar o placeholder text/imagem */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    
+    /* Transição para suavizar o zoom */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* EFEITO DE ZOOM: Aplica a escala na foto quando o mouse passa no cartão (.team-member) */
+.team-member:hover .team-photo {
+    transform: scale(1.1); /* Aumenta a foto em 10% */
+}
+
+/* Estilo dos Ícones Sociais */
+.social-icons a {
+    color: var(--text-muted) !important;
+    transition: color 0.2s;
+    font-size: 1.2rem;
+}
+
+.social-icons a:hover {
+    color: var(--primary-color) !important; /* Escurece no hover */
+}

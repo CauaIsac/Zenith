@@ -1,0 +1,399 @@
+@media (min-width: 1201px) {
+    .card-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1000px) {
+    .card-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .h1-swipper {
+        font-size: 10vw;
+    }
+
+    .login-container {
+        width: 70%;
+        grid-template-columns: 1fr;
+        /* Colapsa para uma coluna no login */
+        height: auto;
+        padding-bottom: 20px;
+    }
+
+    .img__lateral-box {
+        display: none;
+        /* Esconde a imagem lateral no mobile */
+    }
+
+    .login-box {
+        padding: 30px;
+    }
+
+}
+
+/*TESTE=====================================================*/
+
+
+/*TESTE=====================================================*/
+
+@media (max-width: 768px) {
+
+    /* 1. CENTRALIZAR A IMAGEM E DEFINIR UMA ALTURA ADEQUADA PARA O SLIDE */
+    /* .swiper-slide {
+        height: 45vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } */
+
+    /* 2. AJUSTAR A IMAGEM DENTRO DO SLIDE */
+    /* .swiper-slide img {
+        max-height: 100%;
+        max-width: 90%;
+        margin: 0 auto;
+    } */
+
+    nav {
+        flex-wrap: wrap;
+        width: 95%;
+        gap: 10px 20px;
+        padding: 15px 10px;
+    }
+
+    header .logo-zenith {
+        width: 50vw;
+        max-width: 50vw;
+    }
+
+    .parceiros h2 {
+        font-size: 24px;
+    }
+
+    .container-parceiros {
+        grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+
+}
+
+
+@media (max-width: 500px) {
+    .card-container {
+        grid-template-columns: 1fr;
+        padding: 0 15px;
+    }
+
+    .produtos-section {
+        padding: 0 10px;
+    }
+
+    .card-footer {
+        display: flex;
+        flex-direction: column;
+
+
+        align-items: center;
+
+        gap: 5px;
+        padding: 10px 5px;
+
+    }
+
+
+    .rent-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .login-container {
+        width: 90%;
+        margin-top: 10vh;
+    }
+}
+
+.bi-heart-fill:hover {
+    color: var(--primary-color);
+}
+
+/* RESPONSIVIDADE DO FOOTER */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+    }
+
+    .footer-links,
+    .footer-contact {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .social-icons {
+        margin-top: 15px;
+    }
+}
+
+/*====================================== RESPONSIVIDADE DA PAGINA DE DETALHES =============================================*/
+
+@media (max-width: 1100px) {
+
+    /* Em telas menores que 1100px, o layout passa a ser de coluna única */
+    .details-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .details-info {
+        position: static;
+        /* Desativa o sticky para não flutuar no topo */
+        top: auto;
+    }
+
+    /* Ajusta a galeria para mobile: remove as miniaturas laterais */
+    .details-gallery {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .image-thumbnails {
+        width: 100%;
+        order: 2;
+        /* Move as miniaturas para baixo da imagem principal */
+        flex-direction: row;
+        /* Transforma em carrossel horizontal */
+        overflow-x: auto;
+        max-height: 100px;
+        padding: 10px 0;
+        justify-content: center;
+    }
+
+    .image-thumbnails img {
+        width: 100px;
+        height: 80px;
+        flex-shrink: 0;
+    }
+
+    .main-image-container {
+        order: 1;
+        /* Mantém a imagem principal no topo */
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .main-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+
+        padding-top: 15px;
+        padding-bottom: 15px;
+
+
+        gap: 5px;
+    }
+
+    .footer-links,
+    .footer-contact {
+        width: 100%;
+
+
+        margin-top: 1px;
+        margin-bottom: 1px;
+    }
+
+    .social-icons {
+        margin-top: 1px;
+    }
+}
+
+@media (max-width: 500px) {
+
+
+
+
+    .details-info h1 {
+        font-size: 1.5rem;
+    }
+
+    .price-tag {
+        font-size: 2rem;
+    }
+}
+
+/* Responsividade para a Seção Sobre */
+@media (max-width: 900px) {
+    .about-brand-container {
+        grid-template-columns: 1fr;
+        /* Coluna única no mobile */
+        gap: 30px;
+    }
+
+    .hero-content h1 {
+        font-size: 60px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-content h1 {
+        font-size: 40px;
+    }
+}
+
+/*================================MENU HAMBURGUER========================*/
+
+@media screen and (max-width: 768px) {
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        /* Altura da tela */
+        width: 250px;
+        background-color: #ffffff;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 60px 20px;
+        /* Mais padding para conteúdo */
+        gap: 25px;
+        /* Aumentei o espaço entre os links */
+        transition: right 0.3s ease-in-out;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+        display: flex;
+    }
+
+    /* O menu é mostrado quando tem a classe 'active' */
+    nav.active {
+        right: 0;
+    }
+
+    .menu-toggle {
+        display: block;
+        position: relative;
+        z-index: 200;
+        /* para ficar acima do menu */
+    }
+
+    .menu-toggle i {
+        font-size: 2rem;
+        cursor: pointer;
+    }
+
+    /* Estilo para o botão de fechar (X) */
+    nav .close-menu {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        position: absolute;
+        top: 15px;
+        /* Ajuste a posição */
+        right: 15px;
+        /* Ajuste a posição */
+        z-index: 110;
+    }
+
+    .nav-icon-group {
+        /* Garante que os ícones de ação também fiquem em coluna e com texto visível */
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .nav-icon-group .a-nav {
+        /* Adaptação: Seus ícones de ação agora devem mostrar o texto para clareza no menu móvel */
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 5px 0;
+    }
+
+    .nav-icon-group .a-nav i {
+        font-size: 1.2rem;
+    }
+}
+
+/* =====================  RESPONSIVIDADE MODAL DE FAVORITOS ===================== */
+@media (max-width: 600px) {
+
+  /* Cada item favorito vira uma coluna */
+  .fav-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 18px;
+  }
+
+  .fav-card {
+    flex-direction: column;
+    width: 100%;
+    gap: 14px;
+    align-items: center;
+  }
+
+  /* Imagem centralizada e maior */
+  .fav-img-wrapper {
+    width: 100%;
+    max-width: 260px;
+    height: 180px;
+  }
+
+  /* Informações (nome e preço) ficam abaixo da imagem */
+  .fav-info {
+    width: 100%;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .fav-title {
+    font-size: 1.1rem;
+  }
+
+  /* Botões vão para baixo das informações */
+  .fav-actions {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .fav-actions a,
+  .fav-actions button {
+    width: 90%;
+    max-width: 280px;
+  }
+
+  /* Ajuste no header do modal */
+  .div-fixa__favoritos {
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .div-fixa__favoritos span {
+    position: absolute;
+    right: 18px;
+    font-size: 28px;
+  }
+}

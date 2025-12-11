@@ -1,0 +1,96 @@
+/*======================================== PÁGINA DE TERMOS DE USO =====================================*/
+
+.termos-main {
+    /* Garante que o conteúdo comece abaixo do header fixo */
+    margin-top: 15vh; 
+    min-height: 80vh;
+    padding: 30px 0;
+    background-color: var(--background-light); /* Fundo claro para boa legibilidade */
+}
+
+.termos-section {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.termos-container {
+    max-width: var(--max-width-content); /* Reutiliza a largura máxima do seu CSS */
+    width: 90%;
+    background-color: var(--background-card);
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px var(--shadow-light);
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+.termos-title {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 10px;
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 15px;
+    font-weight: 800;
+}
+
+.data-atualizacao {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 40px;
+}
+
+.termo-bloco {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-left: 5px solid var(--secondary-color); /* Linha vertical para destacar blocos */
+    padding-left: 15px;
+}
+
+.termo-bloco h2 {
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.termo-bloco h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.termo-bloco p,
+.termo-bloco ul {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.termo-bloco ul {
+    list-style-type: disc;
+    margin-left: 30px;
+    padding-left: 0;
+}
+
+.termo-bloco li {
+    margin-bottom: 8px;
+}
+
+/* Media Query para responsividade (telas menores) */
+@media (max-width: 768px) {
+    .termos-container {
+        padding: 30px 20px;
+    }
+
+    .termos-title {
+        font-size: 2rem;
+    }
+
+    .termo-bloco h2 {
+        font-size: 1.5rem;
+    }
+}

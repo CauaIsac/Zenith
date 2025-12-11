@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZenithStudios</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/media-queryes.css">
+  <link rel="shortcut icon" href="assets/img/logo_zenith-icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="div__logo-zenith">
+      <a href="homepage.html">
+        <img src="assets/img/zenith-logo_letra.png" class="logo-zenith">
+      </a>
+    </div>
+
+    <!-- menu hamburguer -->
+    <div class="menu-toggle" id="menuToggle">
+      <i class="bi bi-list"></i>
+      <i class="bi bi-x" style="display: none;"></i>
+    </div>
+
+
+    <nav>
+      <!-- fechar menu hamburguer -->
+      <button class="close-menu" id="closeMenu">
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+      <a href="homepage.html#produtos-section" class="a-nav">Comprar</a>
+      <a href="homepage.html" class="a-nav">Início</a>
+      <!-- <a href="" class="a-nav">Vender</a> -->
+      <a href="homepage.html#contact-section" class="a-nav">Contate-nos</a>
+      <a href="" class="a-nav"><i class="bi bi-search"></i></a>
+      <a href="" class="a-nav"><i class="bi bi-heart-fill"></i></a>
+      <a href="#" id="user-icon" class="a-nav"><i class="bi bi-person-fill"></i></a>
+    </nav>
+  </header>
+
+  <section>
+    <main class="perfil-section">
+      <div class="perfil-container">
+        <h1>Meu Perfil</h1>
+        <div class="perfil-layout">
+
+  <div class="perfil-info">
+    <div class="perfil-foto">
+      <img src="assets/img/default-user.png" alt="Foto do Usuário" id="user-photo">
+    </div>
+
+    <div class="perfil-dados">
+      <p><strong>Nome:</strong> <span id="user-name">Carregando...</span></p>
+      <p><strong>Email:</strong> <span id="user-email">Carregando...</span></p>
+      <p><strong>Conta criada em:</strong> <span id="user-date">Carregando...</span></p>
+      <button id="logout-btn" class="button-padrao">Sair</button>
+    </div>
+  </div>
+
+  <!-- edit de perfil -->
+  <div class="perfil-edit">
+    <h2>Editar Perfil</h2>
+    <form id="profileForm">
+      <label for="editName">Nome:</label>
+      <input type="text" id="editName" placeholder="Digite seu nome">
+
+      <label for="editAvatar">Foto do Perfil:</label>
+      <label for="editAvatar" class="custom-file-upload">Escolher Nova Imagem:</label>
+      <input type="file" id="editAvatar" accept="image/*">
+
+      <button type="submit" class="button-padrao">Salvar Alterações</button>
+    </form>
+    <div id="edit-success" style="color: green; margin-top: 10px;"></div>
+    <div id="edit-error" style="color: red; margin-top: 10px;"></div>
+  </div>
+
+</div>
+      </div>
+
+       <!-- ================================== Modal de Favoritos ======================= -->
+      <div id="favoritesModal" class="favorites-modal">
+        <div class="favorites-modal-content">
+          <div class="div-fixa__favoritos">
+            <span id="closeFavoritesModal" class="">&times;</span>
+            <h2>Meus Favoritos</h2>
+          </div>
+          <div id="favoritesContainer" class="favorites-container"></div>
+        </div>
+      </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="suporte-footer">
+    <div class="footer-container">
+
+      <div class="footer-logo">
+        <img src="assets/img/zenith-logo_letra.png" alt="Zenith Studios Logo">
+        <p>
+          O destino de luxo para quem procura o extraordinário em mobilidade.
+          Exclusividade e performance sem igual.
+        </p>
+
+        <div class="social-icons" style="margin-top: 20px;">
+          <a href="#" title="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" title="Whatsapp"><i class="bi bi-whatsapp"></i></a>
+
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h4>Serviços</h4>
+        <ul>
+          <li><a href="#produtos-section">Comprar Carro</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="Sobrenos.html">Sobre Nós</a></li>
+          <li><a href="termos_uso.html">Termos de Uso</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h4>Contato</h4>
+        <p>Telefone: +55 61 9 4002-8922</p>
+        <p>Email: <a href="#" style="color: var(--primary-color);">contato@zenith.com</a></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; 2024 Zenith Studios. Todos os direitos reservados.
+    </div>
+  </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabaseClient.js"></script>
+  <script src="assets/js/perfil.js"></script>
+  <script src="assets/js/authCheck.js"></script>
+  <script src="assets/js/favorites.js"></script>
+  <script src="assets/js/hamburguer.js"></script>
+  <script src="assets/js/toast.js"></script>
+</body>
+
+</html>

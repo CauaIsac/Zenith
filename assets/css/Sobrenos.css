@@ -1,0 +1,94 @@
+/* ==================================== */
+/* 1. VARIÁVEIS DE COR E ESTILOS GERAIS */
+/* ==================================== */
+
+/* Definição de Cores Base */
+:root {
+    --primary-color: #dd0d0d;
+    /* Azul primário (Bootstrap Blue) */
+    --blue-highlight: #e01111;
+    /* Azul ciano para destaque/ícones */
+    --text-dark: #ad0d0d;
+    /* Texto escuro */
+    --text-muted: #ad0d0d;
+    /* Texto secundário/sutil */
+}
+
+/* Aplica as variáveis nas classes do HTML */
+.text-primary-color {
+    color: var(--primary-color) !important;
+}
+
+.text-blue-highlight {
+    color: var(--blue-highlight) !important;
+}
+
+.border-blue-highlight {
+    border-color: var(--blue-highlight) !important;
+}
+
+/* Sombra e transição para cartões de valor */
+.value-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    /* Efeito de elevação sutil no hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ==================================== */
+/* 2. ESTILOS ESPECÍFICOS DA SEÇÃO */
+/* ==================================== */
+
+#sobre-nos {
+    background-color: #e9e9e9;
+    margin-top: 16vh;
+    /* Fundo cinza claro para a seção */
+}
+
+/* Estilo para placeholders de imagem (para garantir a visualização do layout) */
+.placeholder-img {
+    width: 100%;
+    height: 150px;
+    /* Altura padrão para o placeholder */
+    background-color: #e9ecef;
+    /* Cor de fundo do placeholder */
+    color: var(--text-muted);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    /* Garante que a imagem se ajuste ao contêiner */
+}
+
+/* Estilo para a imagem real dentro do placeholder, caso exista (Visão) */
+.placeholder-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Garante que a imagem cubra o espaço sem distorção */
+    display: block;
+}
+
+/* Ajuste de espaçamento e arredondamento para o Acordeão */
+.accordion-item {
+    border: none;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    /* Sombra suave */
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--primary-color);
+    background-color: #e9f5ff;
+    /* Fundo levemente azul para o item aberto */
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.fw-bold mb-1 text-dark{
+    color: var(--primary-color)
+}

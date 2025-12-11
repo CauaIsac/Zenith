@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZenithStudios</title>
+  <link rel="stylesheet" href="assets/css/admin.css">
+ 
+  <link rel="shortcut icon" href="assets/img/logo_zenith-icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+
+<body>
+  <header class="admin-header">
+    <img src="assets/img/zenith-logo_letra.png" style="width: 40vh;" alt="">
+    <button id="logoutButton"><i class="bi bi-box-arrow-right"></i> <a href="homepage.html"
+        class="a-cadastrar">Início</a></button>
+  </header>
+
+  <main class="admin-main">
+    <section class="add-car-section">
+      <h2>Adicionar Veículo</h2>
+      <form id="addCarForm">
+        <input type="text" name="name" placeholder="Nome do veículo" required>
+        <input type="text" name="brand" placeholder="Marca" required>
+
+        <select name="type" required>
+          <option value="">Selecione tipo</option>
+          <option value="carro">Carro</option>
+          <option value="moto">Moto</option>
+        </select>
+
+        <input type="text" name="price" placeholder="Preço (R$)" required>
+        <input type="text" name="details" placeholder="Detalhes adicionais">
+
+        <textarea name="descricao" placeholder="Descrição completa do veículo" rows="4" required></textarea>
+
+        <input type="text" name="vendedor" placeholder="Nome do vendedor" required>
+        <input type="text" name="localizacao" placeholder="Localização (ex: São Paulo, SP)" required>
+
+        <input type="url" name="imagem_1" placeholder="URL da imagem principal" required>
+        <input type="url" name="imagem_2" placeholder="URL da segunda imagem" required>
+        <input type="url" name="imagem_3" placeholder="URL da terceira imagem" required>
+        
+        <button type="submit">Adicionar</button>
+      </form>
+    </section>
+<section class="list-cars-section">
+    <h2>Veículos cadastrados</h2>
+    
+        <input type="text" id="brandFilter" placeholder="Filtrar por Marca (Marcas: Ferrari, BMW...)" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ced4da;">
+        <div id="carsList" class="cars-list">
+            </div>
+</section>
+
+    
+  </main>
+
+  <div id="toast-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="assets/js/supabaseClient.js"></script>
+  <script src="assets/js/admin.js"></script>
+  <script src="assets/js/toast.js"></script>
+  <script src="assets/js/confirm-modal.js"></script>
+</body>
+
+</html>

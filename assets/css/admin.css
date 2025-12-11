@@ -1,0 +1,556 @@
+/* ===== ADMIN.CSS CORRIGIDO E OTIMIZADO - VERSÃO FINAL (COM MELHORIAS DE DESIGN E ESTABILIDADE) ===== */
+
+/* --- Variáveis de Cor --- */
+:root {
+  --primary-color: #0d6efd; /* Azul principal */
+  --danger-color: #dc3545; /* Vermelho para ações de remoção/perigo */
+  --success-color: #28a745; /* Verde para sucesso */
+  --light-bg: #f4f6f9; /* Fundo mais suave */
+  --white: #ffffff;
+  --dark-text: #212529; /* Texto mais escuro */
+  --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 8px 20px rgba(0, 0, 0, 0.15); /* Sombra mais destacada */
+  --border-radius: 10px;
+}
+
+/* ESTILIZAÇÃO DA BARRA DE ROLAGEM (Webkit) E SCROLL SUAVE */
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #707070;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--danger-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a70000;
+}
+
+/* Scroll bonito apenas dentro da lista */
+.cars-list::-webkit-scrollbar {
+  width: 8px;
+  background-color: #7e7e7e;
+}
+
+.cars-list::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 10px;
+}
+
+.cars-list::-webkit-scrollbar-thumb:hover {
+  background: #000000;
+}
+
+
+/* ===== RESET & BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background-color: var(--light-bg);
+  color: var(--dark-text);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ===== ADMIN HEADER (Ajustado para o seu logotipo) ===== */
+.admin-header {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  padding: 15px 25px;
+  background-color: #1312123f;
+  backdrop-filter: blur(50px);
+  margin-bottom: 30px;
+}
+
+.admin-header img {
+  width: min(300px, 40vw);
+  height: auto;
+  padding: 15px;
+}
+
+/* Botões do Header */
+.admin-header button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-header #logoutButton {
+  background-color: var(--danger-color);
+  color: var(--white);
+}
+
+.admin-header #logoutButton:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}
+
+/* ===== MAIN CONTENT (Melhoria na Responsividade do Grid) ===== */
+.admin-main {
+  
+  padding: 20px;
+ 
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 992px) {
+  .admin-main {
+    /* Grid de duas colunas em desktop, a primeira mais estreita para o formulário */
+    grid-template-columns: 400px 1fr;
+    gap: 40px;
+  }
+}
+
+/* ===== SECTIONS (Design Moderno) ===== */
+.add-car-section,
+.list-cars-section {
+  background-color: var(--white);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-medium);
+  margin-top: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-car-section:hover,
+.list-cars-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.add-car-section h2,
+.list-cars-section h2 {
+  margin-bottom: 25px;
+  font-size: 2rem;
+  color: var(--danger-color);
+  border-bottom: 3px solid var(--danger-color);
+  padding-bottom: 15px;
+  font-weight: 700;
+}
+
+/* ===== FORMULÁRIO DE ADIÇÃO (Melhoria na UX) ===== */
+.add-car-section form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.add-car-section input[type="text"],
+.add-car-section input[type="url"],
+.add-car-section select,
+.add-car-section textarea {
+  flex: 1 1 100%;
+  padding: 14px;
+  border-radius: var(--border-radius);
+  border: 1px solid #ced4da;
+  transition: all 0.3s;
+  font-size: 1rem;
+  background-color: var(--light-bg);
+}
+
+.add-car-section input:focus,
+.add-car-section select:focus,
+.add-car-section textarea:focus {
+  border-color: var(--primary-color);
+  background-color: var(--white);
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.35);
+}
+
+.add-car-section textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Media Query para layout de 2 colunas no formulário */
+@media (min-width: 576px) {
+  .add-car-section input:not([name^="imagem_"]):not([type="checkbox"]):not([name="details"]):not([name="vendedor"]):not([name="localizacao"]):not([name="descricao"]),
+  .add-car-section select {
+    flex: 1 1 calc(50% - 7.5px);
+  }
+
+  .add-car-section textarea,
+  .add-car-section input[name="details"],
+  .add-car-section input[name="vendedor"],
+  .add-car-section input[name="localizacao"] {
+    flex: 1 1 100%;
+  }
+
+  .add-car-section input[name^="imagem_"] {
+    flex: 1 1 calc(33.333% - 10px);
+  }
+}
+
+.add-car-section label {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.add-car-section input[type="checkbox"] {
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.add-car-section button[type="submit"] {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: var(--success-color);
+  color: var(--white);
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
+
+.add-car-section button[type="submit"]:hover {
+  background-color: #1e7e34;
+}
+
+/* ===== LISTA DE VEÍCULOS (Estilização do Filtro) ===== */
+#brandFilter {
+  padding: 14px;
+  border-radius: var(--border-radius);
+  border: 1px solid #ced4da;
+  font-size: 1rem;
+  background-color: var(--light-bg);
+  transition: all 0.3s;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#brandFilter:focus {
+  border-color: var(--primary-color);
+  background-color: var(--white);
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.cars-list {
+ display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  border-radius: var(--border-radius);
+}
+
+/* ===== ITEM DA LISTA (Car-Item: Responsividade e Visual) ===== */
+.car-item {
+  display: flex;
+  flex-direction: column; /* PADRÃO: Coluna para mobile/telas pequenas */
+  background-color: var(--white);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  border-left: 6px solid var(--danger-color);
+  box-shadow: var(--shadow-light);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.car-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Novo: Div que contém o texto e imagens do veículo. Em mobile, ocupa toda a largura */
+.car-item > div:first-child {
+  flex-grow: 1;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.car-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: var(--dark-text);
+}
+
+.car-item p {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.car-item strong {
+  font-weight: 700;
+}
+
+.car-item .image-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #eee;
+}
+
+.car-item img {
+  width: 90px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 5px;
+  border: 2px solid #ddd;
+}
+
+.car-item .actions {
+  display: flex;
+  gap: 10px;
+  align-self: flex-start; /* Alinhado à esquerda em mobile */
+  margin-top: 10px;
+}
+
+.car-item button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.car-item .edit-btn {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.car-item .edit-btn:hover {
+  background-color: #0a58ca;
+}
+
+.car-item .delete-btn {
+  background-color: var(--danger-color);
+  color: var(--white);
+}
+
+.car-item .delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* Correção para alinhar os botões em desktop e fixar sua largura */
+@media (min-width: 768px) {
+  .car-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .car-item > div {
+    margin-bottom: 0;
+  }
+
+  .car-item .actions {
+    align-self: center;
+    margin-top: 0;
+    /* CHAVE DA CORREÇÃO: Fixa a largura e impede que encolha */
+    flex-shrink: 0; 
+    width: 200px; /* Largura suficiente para os botões */
+    justify-content: flex-end; /* Alinha os botões à direita */
+  }
+
+  /* Garante que o texto ocupe o espaço restante */
+  .car-item > div:first-child {
+      flex-grow: 1;
+      width: auto;
+      min-width: 300px;
+  }
+}
+
+/* ===== MODAL DE EDIÇÃO E CONFIRMAÇÃO (Ajustado o border-radius) ===== */
+.edit-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.edit-modal form {
+  background-color: var(--white);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  width: 70%;
+  max-width: 90%;
+  box-shadow: var(--shadow-medium);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
+.edit-modal h3 {
+  color: var(--danger-color);
+  font-size: 1.75rem;
+}
+
+.edit-modal textarea {
+  resize: vertical;
+}
+
+.edit-modal input, .edit-modal select, .edit-modal textarea {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+
+.edit-modal button {
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.edit-modal button[type="submit"] {
+  background-color: var(--success-color);
+  color: var(--white);
+}
+
+.edit-modal button[type="submit"]:hover {
+  background-color: #1e7e34;
+}
+
+.edit-modal button#closeModal {
+  background-color: #6c757d;
+  color: var(--white);
+}
+
+.edit-modal button#closeModal:hover {
+  background-color: #5a6268;
+}
+
+/* ===== MODAL DE CONFIRMAÇÃO ===== */
+.custom-confirm {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.confirm-content {
+  background: var(--white);
+  padding: 25px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  width: 300px;
+  box-shadow: var(--shadow-medium);
+  animation: popIn 0.3s ease;
+}
+
+.confirm-content p {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.confirm-actions button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-confirm {
+  background: var(--success-color);
+  color: #fff;
+}
+.btn-confirm:hover {
+  background: #1e7e34;
+}
+
+.btn-cancel {
+  background: var(--danger-color);
+  color: #fff;
+}
+.btn-cancel:hover {
+  background: #c82333;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ===== TOASTS (Mantido o original) ===== */
+#toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  background-color: #333;
+  color: var(--white);
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  min-width: 250px;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast.success {
+  background-color: var(--success-color);
+}
+
+.toast.error {
+  background-color: var(--danger-color);
+}
