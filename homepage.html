@@ -20,7 +20,6 @@
         <img src="assets/img/zenith-logo_letra.png" class="logo-zenith">
       </a>
     </div>
-    <!-- menu hamburguer -->
     <div class="menu-toggle" id="menuToggle">
       <i class="bi bi-list"></i>
       <i class="bi bi-x" style="display: none;"></i>
@@ -28,21 +27,28 @@
 
 
     <nav>
-      <!-- fechar menu hamburguer -->
       <button class="close-menu" id="closeMenu">
         <i class="bi bi-x-lg"></i>
       </button>
 
-      <!-- icones da navegacao -->
-
       <a href="#produtos-section" class="a-nav">Comprar</a>
       <a href="homepage.html" class="a-nav">Início</a>
       <a href="#contact-section" class="a-nav">Contate-nos</a>
-      <a href="" class="a-nav"><i class="bi bi-search"></i></a>
+
+      <div class="search-container a-nav">
+        <form action="#" method="GET" id="searchForm">
+          <input type="text" name="q" id="searchInput" placeholder="Buscar veículos..." required>
+          <button type="submit" class="search-btn" title="Pesquisar">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+      </div>
       <a href="" class="a-nav"><i class="bi bi-heart-fill"></i></a>
       <a href="#" id="user-icon" class="a-nav"><i class="bi bi-person-fill"></i></a>
     </nav>
   </header>
+  <div id="searchResultsWindow" class="search-results-window">
+  </div>
 
   <main>
     <!-- ================== SEÇAO DOS BANNERS ====================== -->
@@ -133,7 +139,7 @@
         <button class="filter-btn" data-filter="moto">Motos</button>
       </div>
 
-      <!-- AREA DOS CARDS PRINCIPAIS DA PAGINA (ADICIONADOS DINAMICAMENTE PELO JS)-->
+      <!-- AREA DOS CARDS PRINCIPAIS DA PAGINA -->
       <div class="card-container">
 
       </div>
@@ -155,41 +161,42 @@
     <!--=================================== FORMULÁRIO DE CONTATO ========================== -->
 
     <section class="contact-section" id="contact-section">
-         
-    <div class="contact-div">
-    
+
+      <div class="contact-div">
+
         <div class="form-contact_div">
-            <form action="#" method="POST" class="contact-form" id="whatsappForm">
-                
-                <h2 class="section-title">Fale Conosco</h2>
-                <p>Envie sua mensagem no nosso whatsapp e responderemos o mais breve possível.</p>
-                
-                <div class="form-group">
-                    <!-- <label for="name">Nome:</label> -->
-                    <input type="text" id="name" name="name" required placeholder="Seu nome completo">
-                </div>
+          <form action="#" method="POST" class="contact-form" id="whatsappForm">
 
-                <div class="form-group">
-                    <!-- <label for="email">E-mail:</label> -->
-                    <input type="email" id="email" name="email" required placeholder="exemplo@dominio.com">
-                </div>
-                
-                <div class="form-group">
-                    <!-- <label for="subject">Assunto (opcional):</label> -->
-                    <input type="text" id="subject" name="subject" placeholder="Assunto da mensagem">
-                </div>
+            <h2 class="section-title">Fale Conosco</h2>
+            <p>Envie sua mensagem no nosso whatsapp e responderemos o mais breve possível.</p>
 
-                <div class="form-group">
-                    <!-- <label for="message">Mensagem:</label> -->
-                    <textarea id="message" name="message" rows="5" required placeholder="Digite sua mensagem aqui..."></textarea>
-                </div>
+            <div class="form-group">
+              <!-- <label for="name">Nome:</label> -->
+              <input type="text" id="name" name="name" required placeholder="Seu nome completo">
+            </div>
 
-                <button type="submit" class="submit-btn">Enviar Mensagem</button>
+            <div class="form-group">
+              <!-- <label for="email">E-mail:</label> -->
+              <input type="email" id="email" name="email" required placeholder="exemplo@dominio.com">
+            </div>
 
-            </form>
+            <div class="form-group">
+              <!-- <label for="subject">Assunto (opcional):</label> -->
+              <input type="text" id="subject" name="subject" placeholder="Assunto da mensagem">
+            </div>
+
+            <div class="form-group">
+              <!-- <label for="message">Mensagem:</label> -->
+              <textarea id="message" name="message" rows="5" required
+                placeholder="Digite sua mensagem aqui..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Enviar Mensagem</button>
+
+          </form>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
     <!-- FOOTER -->
     <footer id="suporte-footer">
       <div class="footer-container">
@@ -220,7 +227,7 @@
           <h4>Empresa</h4>
           <ul>
             <li><a href="Sobrenos.html">Sobre Nós</a></li>
-            <li><a href="termos_uso.html">Termos de Uso</a></li>
+            <li><a href="#">Termos de Uso</a></li>
           </ul>
         </div>
 
@@ -272,7 +279,24 @@
   <script src="assets/js/filtro.js"></script>
   <script src="assets/js/toast.js"></script>
   <script src="assets/js/modal-whatsapp.js"></script>
+  <script src="assets/js/barradepesquisa.js"></script>
   <!-- <script src="assets/js/perfil.js"></script> -->
+
+  <div id="searchModal" class="modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Resultados da Pesquisa</h3>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body-content card-container-results">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <p>Os resultados são carregados em tempo real do nosso inventário.</p>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

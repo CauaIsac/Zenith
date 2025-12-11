@@ -72,9 +72,9 @@ header {
   backdrop-filter: blur(50px);
 }
 
-/* .header_login-page {
-  padding-bottom: 15vh;
-} */
+ .header_login-page {
+  width: 100vw;
+} 
 
 header .logo-zenith {
   width: 400px;
@@ -88,8 +88,7 @@ nav {
   align-items: center;
   justify-content: center;
   z-index: 10;
-  padding: 10px 0;
-
+  padding: 10px 0; 
 }
 
 nav a {
@@ -717,9 +716,12 @@ footer {
   color: #999;
 }
 
-.bi-instagram:hover, .bi-facebook:hover, .bi-whatsapp:hover{
-    color: var(--ferrari-red);
+.bi-instagram:hover,
+.bi-facebook:hover,
+.bi-whatsapp:hover {
+  color: var(--ferrari-red);
 }
+
 /*======================================== PÁGINA DE DETALHES =====================================*/
 #margin-top__detailsContainer {
   margin-top: 10vh;
@@ -1584,7 +1586,7 @@ body.menu-open .menu-toggle {
     align-items: center;
     justify-content: center;
     gap: 30px;
-    padding:  40px;
+    padding: 40px;
   }
 
   .perfil-dados {
@@ -1740,4 +1742,237 @@ body.menu-open .menu-toggle {
 .submit-btn:hover {
   background-color: var(--ferrari-red);
   transform: scale(1.01);
+}
+
+/* Exemplo Básico de CSS para a Barra de Pesquisa */
+
+/* ================== CONFIGURAÇÃO INICIAL (FECHADA E ELEGANTE) ================== */
+
+/* Contêiner da pesquisa na navegação */
+.search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 10px;
+  /* Define a altura máxima do contêiner para alinhar na header */
+}
+
+/* Formulário de Pesquisa: Contêiner principal da Cápsula */
+.search-container form {
+  /* CORREÇÃO CRUCIAL: Deve ser display: flex para alinhar input e botão */
+  display: contents;
+  align-items: center;
+
+  /* A Lupa fica à direita na expansão (row-reverse) */
+  flex-direction: row-reverse;
+
+  /* Largura e altura iniciais para a lupa */
+  width: 32px;
+  height: 32px;
+
+
+
+
+  /* CRUCIAL: Mantém o formato de pílula/cápsula */
+  border-radius: 16px;
+  overflow: hidden;
+
+  transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Campo de Input: Escondido por padrão */
+#searchInput {
+  /* Largura 0, sem padding lateral */
+  width: 0;
+  padding: 6px 0px;
+
+  border: none;
+  outline: none;
+  font-size: 16px;
+
+  background-color: transparent;
+  /* Texto invisível no estado fechado */
+  color: transparent;
+
+  transition: width 0.3s ease-in-out, padding 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Botão de Pesquisa (Lupa) */
+.search-btn {
+  background-color: transparent;
+  color: #ffffff;
+  /* Lupa branca no fundo escuro inicial */
+  border: none;
+
+  /* Garante que o botão tenha seu próprio espaço fixo (ex: 32x32px) */
+  min-width: 32px;
+  height: 32px;
+
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  z-index: 2;
+}
+
+.search-btn:hover {
+  color: var(--hover-color, #CCCCCC);
+  filter: none;
+}
+
+/* ================== CONFIGURAÇÃO ABERTA (EXPANDIDA E ELEGANTE) ================== */
+
+/* Quando a classe 'open' é adicionada ao formulário pelo JS */
+.search-container form.open {
+  width: 250px;
+
+  /* CORREÇÃO CRUCIAL PARA O DESIGN CÁPSULA: Fundo claro/branco */
+  background-color: #ffffff;
+
+  /* Sombra suave para destacar a pílula do fundo da header */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+}
+
+.search-container form.open #searchInput {
+  /* O input preenche o espaço restante (250px - 32px do botão) */
+  width: calc(100% - 32px);
+
+  background-color: transparent;
+  /* CORREÇÃO CRUCIAL: Texto escuro no fundo claro */
+  color: #333333;
+
+  /* Padding horizontal para o texto aparecer */
+  padding: 6px 10px 6px 15px;
+  /* Mais padding à esquerda */
+}
+
+.search-container form.open .search-btn {
+  /* CORREÇÃO CRUCIAL: Lupa escura para contraste no fundo claro */
+  color: #333333;
+}
+
+/* ESTILOS DO MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Fundo semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  /* Garante que fique acima de tudo */
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s;
+}
+
+.modal.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-dialog {
+  background: white;
+  width: 90%;
+  max-width: 1200px;
+  /* Limite de largura para o modal */
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+.modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  /* Permite scroll no corpo do modal */
+  flex-grow: 1;
+}
+
+/* Container que recebe os cards. Ajuste o display para o seu layout de cards */
+.modal-body-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Estilização da Janela de Resultados Flutuante */
+.search-results-window {
+  position: absolute;
+  /* Permite o posicionamento sobre outros elementos */
+  top: 100px;
+  /* Ajuste para a altura exata do seu header + margem */
+  left: 50%;
+  transform: translateX(-50%);
+  /* Centraliza horizontalmente */
+  width: 90%;
+  /* Ajuste para a largura da sua barra de pesquisa */
+  max-width: 800px;
+  /* Mantenha a mesma largura máxima da sua barra, se houver */
+
+  background-color: #fff;
+  /* Fundo branco ou cor do tema */
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  /* Garante que fique acima de outros elementos */
+  max-height: 400px;
+  /* Limita a altura para que a lista seja rolável */
+  overflow-y: auto;
+
+  display: none;
+  /* Inicialmente oculta. O JS vai mostrar/ocultar */
+  border-radius: 8px;
+  padding: 10px 0;
+}
+
+/* Estilização dos Itens Individuais de Resultado */
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  /* Para remover sublinhado se for <a> */
+  color: #333;
+}
+
+.search-result-item:hover {
+  background-color: #f0f0f0;
+}
+
+.search-result-item img {
+  width: 50px;
+  height: 30px;
+  object-fit: cover;
+  margin-right: 15px;
+  border-radius: 4px;
+}
+
+.search-result-item span {
+  font-weight: 500;
 }

@@ -268,7 +268,7 @@
         /* Altura da tela */
         width: 250px;
         background-color: #ffffff;
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: flex-start;
         padding: 60px 20px;
         /* Mais padding para conteúdo */
