@@ -54,12 +54,7 @@
         margin: 0 auto;
     } */
 
-    nav {
-        flex-wrap: wrap;
-        width: 95%;
-        gap: 10px 20px;
-        padding: 15px 10px;
-    }
+    
 
     header .logo-zenith {
         width: 50vw;
@@ -267,7 +262,7 @@
         height: 100vh;
         /* Altura da tela */
         width: 250px;
-        background-color: #ffffff;
+        background-color: #ffff;
         flex-direction: column-reverse;
         align-items: flex-start;
         padding: 60px 20px;
@@ -331,6 +326,15 @@
 
     .nav-icon-group .a-nav i {
         font-size: 1.2rem;
+    }
+
+    #searchInput{
+        display: block;
+        height: 30px;
+    }
+    
+    #searchInput:active{
+        background-color: black;
     }
 }
 

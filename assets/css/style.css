@@ -1834,7 +1834,7 @@ body.menu-open .menu-toggle {
 
 /* Quando a classe 'open' é adicionada ao formulário pelo JS */
 .search-container form.open {
-  width: 250px;
+  
 
   /* CORREÇÃO CRUCIAL PARA O DESIGN CÁPSULA: Fundo claro/branco */
   background-color: #ffffff;
@@ -1847,14 +1847,14 @@ body.menu-open .menu-toggle {
 .search-container form.open #searchInput {
   /* O input preenche o espaço restante (250px - 32px do botão) */
   /* width: calc(100% - 32px); */
-  width: 10vw;
-
+  width: 20vw;
+  height: 30px;
   background-color: transparent;
   /* CORREÇÃO CRUCIAL: Texto escuro no fundo claro */
   color: #333333;
 
   /* 💡 AJUSTE: Padding horizontal para o texto aparecer, padding vertical zero (centraliza) */
-  padding: 0 10px 0 15px;
+  /* padding: 0 10px 0 15px; */
 }
 
 .search-container form.open .search-btn {
