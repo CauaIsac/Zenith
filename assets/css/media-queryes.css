@@ -32,30 +32,21 @@
 
 }
 
-/*TESTE=====================================================*/
+/*==========BANNER RESPONSIVO========*/
 
 
-/*TESTE=====================================================*/
+
+/* ==========BANNER RESPONSIVO======== */
+
+@media (max-width: 480px) {
+  .banner-section .swiper {
+      height: 45vh;
+  }
+}
+
 
 @media (max-width: 768px) {
-
-    /* 1. CENTRALIZAR A IMAGEM E DEFINIR UMA ALTURA ADEQUADA PARA O SLIDE */
-    /* .swiper-slide {
-        height: 45vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    } */
-
-    /* 2. AJUSTAR A IMAGEM DENTRO DO SLIDE */
-    /* .swiper-slide img {
-        max-height: 100%;
-        max-width: 90%;
-        margin: 0 auto;
-    } */
-
     
-
     header .logo-zenith {
         width: 50vw;
         max-width: 50vw;
@@ -72,8 +63,6 @@
     .section-title {
         font-size: 28px;
     }
-
-
 }
 
 

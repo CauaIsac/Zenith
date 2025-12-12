@@ -17,6 +17,8 @@
 
   --shadow-light: rgba(0, 0, 0, 0.08);
   --shadow-hover: rgba(0, 0, 0, 0.15);
+
+  --header-height: 135px;
 }
 
 .racing-sans-one-regular {
@@ -40,10 +42,12 @@ body {
 
 body::-webkit-scrollbar {
   width: 10px;
+  z-index: 2;
 }
 
 body::-webkit-scrollbar-track {
   background: #494848;
+  z-index: 2;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -56,25 +60,28 @@ body::-webkit-scrollbar-thumb:hover {
 
 /*=========================================== HEADER (HOMEPAGE) ==========================================*/
 header {
-  height: 20vh;
+  height: var(--header-height);
 
   display: flex;
-  width: calc(100% - 10px);
+  width: calc(100% - 9.9px);
+  /* width: 100%; */
   align-items: center;
   justify-content: center;
   gap: 10px;
   flex-direction: column;
-  padding-top: 3vh;
+  padding-top: 0;
+  /* MUDAR DEPOIS SE O PADDING NAO AJUSTAR */
   position: fixed;
-  z-index: 1000;
-
+  z-index: 999;
+  top: 0;
+  left: 0;
   background-color: #1312123f;
-  backdrop-filter: blur(50px);
+  backdrop-filter: blur(10px);
 }
 
- .header_login-page {
+.header_login-page {
   width: 100vw;
-} 
+}
 
 header .logo-zenith {
   width: 400px;
@@ -88,7 +95,7 @@ nav {
   align-items: center;
   justify-content: center;
   z-index: 10;
-  padding: 10px 0; 
+  padding: 10px 0;
 }
 
 nav a {
@@ -116,7 +123,11 @@ nav a {
 }
 
 .div__logo-zenith {
-  padding-bottom: 10px;
+ transform: translateY(8px);
+ transition: transform 0.3s ease;
+ display: flex;
+ justify-content: center;
+ width: 100%;
 }
 
 .bi {
@@ -273,55 +284,38 @@ button:hover {
 /*======================================BANNER-SECTION (HOMEPAGE) =============================================*/
 main {
   margin-top: 0;
-  padding-top: 11vh;
+  padding-top: var(--header-height);
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+  /* display: flex;
+  flex-direction: column; */
+  box-sizing: border-box;
 }
 
 .banner-section {
+  padding-top: 0;
+  margin-top: 0;
+  width: 100%;
   background-size: cover;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* height: calc(100vh - var(--header-height)); */
+  min-height: auto;
   position: relative;
   overflow: hidden;
-  z-index: 0;
+}
+
+.banner-section .swiper {
+  width: 100%;
+  height: 100% !important;
 }
 
 .swiper-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  padding: 0;
-}
-
-.h1-swipper {
-  transform: translateY(-50%);
-  text-align: center;
-  z-index: -1;
-  pointer-events: none;
-  width: 100%;
-  letter-spacing: 20px;
-  position: absolute;
-  top: 2vh;
-  font-size: 15vh;
-  font-family: "Racing Sans One", sans-serif;
-  font-weight: 400;
-  color: #fcfcfc9c;
-}
-
-
-.swiper {
-  width: 100%;
-
+  object-position: center;
 }
 
 .swiper-slide {
-
   height: 100%;
   object-fit: cover;
   text-align: center;
@@ -355,28 +349,6 @@ main {
 
 .swiper-pagination-bullet-active {
   background-color: #fff !important;
-}
-
-
-
-#bg-ferrari {
-  background-color: #C1121F;
-}
-
-#bg-x6 {
-  background-color: #6E6E6E;
-}
-
-#bg-cayman {
-  background-color: #d3b210;
-}
-
-#bg-g63 {
-  background-color: #0B1F3A;
-}
-
-#bg-urus {
-  background-color: #6A0DAD;
 }
 
 /*=================================================INFO-SECTION (PARCEIROS) =======================================*/
@@ -1834,7 +1806,7 @@ body.menu-open .menu-toggle {
 
 /* Quando a classe 'open' é adicionada ao formulário pelo JS */
 .search-container form.open {
-  
+
 
   /* CORREÇÃO CRUCIAL PARA O DESIGN CÁPSULA: Fundo claro/branco */
   background-color: #ffffff;
@@ -1847,14 +1819,16 @@ body.menu-open .menu-toggle {
 .search-container form.open #searchInput {
   /* O input preenche o espaço restante (250px - 32px do botão) */
   /* width: calc(100% - 32px); */
+  transform: translateY(9px);
+ 
   width: 20vw;
   height: 30px;
   background-color: transparent;
   /* CORREÇÃO CRUCIAL: Texto escuro no fundo claro */
-  color: #333333;
+  color: red;
 
   /* 💡 AJUSTE: Padding horizontal para o texto aparecer, padding vertical zero (centraliza) */
-  /* padding: 0 10px 0 15px; */
+  padding: 0;
 }
 
 .search-container form.open .search-btn {
@@ -1870,12 +1844,12 @@ body.menu-open .menu-toggle {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
- 
+
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  
+
   visibility: hidden;
   opacity: 0;
   transition: visibility 0.3s, opacity 0.3s;
