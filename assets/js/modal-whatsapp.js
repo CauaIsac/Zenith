@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const TELEFONE_VENDEDOR = "5561993894755"; // coloque o número final aqui
+  const TELEFONE_VENDEDOR = "5561999999999"; // coloque o número final aqui
   const whatsappBaseURL = `https://wa.me/${TELEFONE_VENDEDOR}?text=`;
 
   /* ======================================================

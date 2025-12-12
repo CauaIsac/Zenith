@@ -70,7 +70,6 @@ header {
   gap: 10px;
   flex-direction: column;
   padding-top: 0;
-  /* MUDAR DEPOIS SE O PADDING NAO AJUSTAR */
   position: fixed;
   z-index: 999;
   top: 0;
@@ -85,7 +84,6 @@ header {
 
 header .logo-zenith {
   width: 400px;
-  /* max-width: 35vw; */
 }
 
 nav {
@@ -297,7 +295,6 @@ main {
   margin-top: 0;
   width: 100%;
   background-size: cover;
-  /* height: calc(100vh - var(--header-height)); */
   min-height: auto;
   position: relative;
   overflow: hidden;
@@ -701,7 +698,7 @@ footer {
 
 .details-container {
 
-  width: 100%;
+  width: 100% - 10px;
   display: grid;
   grid-template-columns: 2fr 1fr;
   align-items: center;
@@ -725,6 +722,7 @@ footer {
 .image-thumbnails {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   overflow-y: auto;
   width: 100%;
@@ -884,26 +882,45 @@ span {
 
 /* Banner Principal da Marca */
 .hero-brand-banner {
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+padding-top: 0;
+    margin-top: 0;
+    width: 100%;
+    
+    /* 1. Definir uma altura responsiva usando Viewport Height (vh) */
+    /* Para Desktop/Padrão: O banner ocupará 40% da altura visível da tela. */
+    height: 60vh; 
+    
+    /* Se a imagem for aplicada como background-image (melhor prática para banners): */
+    background-size: cover; 
+    background-position: center; /* Centraliza a imagem no container */
+    background-repeat: no-repeat;
+    
+    min-height: 200px; /* Garante uma altura mínima para telas muito grandes */
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 61vh;
+ height: calc(100% - var(--header-height));
+    width: 100%; /* Garante que o conteúdo ocupe todo o banner */
+    
+    /* Centraliza QUALQUER conteúdo interno (texto, logo, etc.) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    text-align: center;
 
 }
 
 .hero-content img {
-  object-fit: cover;
-  padding: 0;
-  max-width: 100%;
-  margin: 0;
+ padding: 0;
+    width: 100%;
+    height: 100%; /* Força a imagem a ocupar a altura definida em .hero-brand-banner (40vh) */
+    
+    /* ESSENCIAL: Garante que a imagem preencha o espaço sem ser distorcida */
+    object-fit: cover; 
+    object-position: center;
 }
 
 /* Seção Sobre a Marca */
