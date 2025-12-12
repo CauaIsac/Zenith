@@ -1,6 +1,6 @@
 @media (min-width: 1201px) {
     .card-container {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
@@ -32,12 +32,6 @@
 
 }
 
-/*==========BANNER RESPONSIVO========*/
-
-
-
-/* ==========BANNER RESPONSIVO======== */
-
 @media (max-width: 480px) {
   .banner-section .swiper {
       height: 45vh;
@@ -50,6 +44,15 @@
     header .logo-zenith {
         width: 50vw;
         max-width: 50vw;
+    }
+
+    /* PARA HEADER FICAR FULL NO IPHONE */
+    @supports not selector(::-webkit-scrollbar-track) {
+        header {
+            width: 100vw; 
+            left: 50%;
+            transform: translateX(-50%); 
+        }
     }
 
     .parceiros h2 {
