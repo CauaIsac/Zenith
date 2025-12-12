@@ -1750,16 +1750,16 @@ body.menu-open .menu-toggle {
 
 /* Contêiner da pesquisa na navegação */
 .search-container {
-  display: flex;
+  display: contents;
   align-items: center;
   position: relative;
-  height: 10px;
-  /* Define a altura máxima do contêiner para alinhar na header */
+  /* 💡 AJUSTE: Altura mínima para garantir o alinhamento central na header */
+  height: 40px;
 }
 
 /* Formulário de Pesquisa: Contêiner principal da Cápsula */
 .search-container form {
-  /* CORREÇÃO CRUCIAL: Deve ser display: flex para alinhar input e botão */
+  /* 💡 CORREÇÃO CRUCIAL: Agora é display: flex */
   display: contents;
   align-items: center;
 
@@ -1769,9 +1769,7 @@ body.menu-open .menu-toggle {
   /* Largura e altura iniciais para a lupa */
   width: 32px;
   height: 32px;
-
-
-
+  /* Altura da pílula/cápsula */
 
   /* CRUCIAL: Mantém o formato de pílula/cápsula */
   border-radius: 16px;
@@ -1784,7 +1782,8 @@ body.menu-open .menu-toggle {
 #searchInput {
   /* Largura 0, sem padding lateral */
   width: 0;
-  padding: 6px 0px;
+  /* 💡 AJUSTE: Remove padding vertical, altura é dada pelo form */
+  padding: 0;
 
   border: none;
   outline: none;
@@ -1794,10 +1793,12 @@ body.menu-open .menu-toggle {
   /* Texto invisível no estado fechado */
   color: transparent;
 
+  height: 100%;
+  /* Garante que o input preencha a altura do form */
+
   transition: width 0.3s ease-in-out, padding 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-/* Botão de Pesquisa (Lupa) */
 .search-btn {
   background-color: transparent;
   color: #ffffff;
@@ -1821,6 +1822,14 @@ body.menu-open .menu-toggle {
   filter: none;
 }
 
+/* 💡 AJUSTE CRUCIAL: Remove o contorno de foco padrão (o quadrado branco) */
+.search-btn:focus {
+  outline: none;
+
+  /* Adicione um indicador visual sutil para acessibilidade (opcional, mas recomendado) */
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
 /* ================== CONFIGURAÇÃO ABERTA (EXPANDIDA E ELEGANTE) ================== */
 
 /* Quando a classe 'open' é adicionada ao formulário pelo JS */
@@ -1837,15 +1846,15 @@ body.menu-open .menu-toggle {
 
 .search-container form.open #searchInput {
   /* O input preenche o espaço restante (250px - 32px do botão) */
-  width: calc(100% - 32px);
+  /* width: calc(100% - 32px); */
+  width: 10vw;
 
   background-color: transparent;
   /* CORREÇÃO CRUCIAL: Texto escuro no fundo claro */
   color: #333333;
 
-  /* Padding horizontal para o texto aparecer */
-  padding: 6px 10px 6px 15px;
-  /* Mais padding à esquerda */
+  /* 💡 AJUSTE: Padding horizontal para o texto aparecer, padding vertical zero (centraliza) */
+  padding: 0 10px 0 15px;
 }
 
 .search-container form.open .search-btn {
@@ -1854,19 +1863,19 @@ body.menu-open .menu-toggle {
 }
 
 /* ESTILOS DO MODAL */
-.modal {
+.modal-search {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  /* Fundo semi-transparente */
+ 
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  /* Garante que fique acima de tudo */
+  
   visibility: hidden;
   opacity: 0;
   transition: visibility 0.3s, opacity 0.3s;
@@ -1922,31 +1931,27 @@ body.menu-open .menu-toggle {
 /* Estilização da Janela de Resultados Flutuante */
 .search-results-window {
   position: absolute;
-  /* Permite o posicionamento sobre outros elementos */
-  top: 100px;
-  /* Ajuste para a altura exata do seu header + margem */
-  left: 50%;
-  transform: translateX(-50%);
-  /* Centraliza horizontalmente */
-  width: 90%;
-  /* Ajuste para a largura da sua barra de pesquisa */
-  max-width: 800px;
-  /* Mantenha a mesma largura máxima da sua barra, se houver */
+  /* Centraliza a janela abaixo da barra de pesquisa */
+  top: 45px;
+  /* Ajuste para que fique logo abaixo da barra (32px de altura da barra + margem) */
+  right: 0;
+  /* Alinha à direita da barra, já que a barra está à direita */
+  width: 250px;
+  /* Largura igual à barra aberta */
 
   background-color: #fff;
-  /* Fundo branco ou cor do tema */
   border: 1px solid #ddd;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  /* Garante que fique acima de outros elementos */
+  z-index: 100;
+  /* Garante que fique acima de outros elementos na header, mas abaixo do modal */
   max-height: 400px;
-  /* Limita a altura para que a lista seja rolável */
   overflow-y: auto;
 
   display: none;
   /* Inicialmente oculta. O JS vai mostrar/ocultar */
   border-radius: 8px;
-  padding: 10px 0;
+  padding: 0;
+  /* Remove padding vertical, usa padding nos itens */
 }
 
 /* Estilização dos Itens Individuais de Resultado */
@@ -1958,7 +1963,7 @@ body.menu-open .menu-toggle {
   transition: background-color 0.2s;
   text-decoration: none;
   /* Para remover sublinhado se for <a> */
-  color: #333;
+  color: #333333;
 }
 
 .search-result-item:hover {

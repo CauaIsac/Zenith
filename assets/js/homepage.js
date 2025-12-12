@@ -1,4 +1,4 @@
-// homepage.js - versão completa com Busca em Tempo Real (Live Search) e Debounce
+// homepage.js - versão completa com Busca em Tempo Real (Live Search), Debounce, Redirecionamento Direto e SCROLL APENAS NO SUBMIT
 
 console.log("homepage.js carregado ✅");
 
@@ -11,15 +11,12 @@ const searchButton = searchForm.querySelector('.search-btn');
 
 
 // =========================================================================
-// FUNÇÃO DE UTILIDADE: DEBOUNCE (NOVA)
+// FUNÇÃO DE UTILIDADE: DEBOUNCE
 // =========================================================================
 
 /**
  * Cria uma função debounce que atrasa a execução da função fornecida
  * até que se passe um determinado tempo sem novas chamadas.
- * Útil para limitar requisições em eventos como 'input'.
- * @param {Function} func A função a ser executada após o debounce.
- * @param {number} delay O tempo de atraso em milissegundos.
  */
 function debounce(func, delay) {
   let timeout;
@@ -53,11 +50,7 @@ async function cleanInvalidFavoritesHome() {
   }
 
   const existingIds = cars.map(c => String(c.id));
-
-  // Mantém apenas favoritos válidos
-  const filtrados = favoritos.filter(f =>
-    existingIds.includes(String(f.id))
-  );
+  const filtrados = favoritos.filter(f => existingIds.includes(String(f.id)));
 
   if (filtrados.length !== favoritos.length) {
     localStorage.setItem(FAVORITES_KEY, JSON.stringify(filtrados));
@@ -67,24 +60,20 @@ async function cleanInvalidFavoritesHome() {
 
 // --- FUNÇÃO PARA CRIAR CARD ---
 function createCarCard(car) {
-  // Usa as novas colunas de imagem
   const images = [car.imagem_1, car.imagem_2, car.imagem_3].filter(Boolean);
 
   const card = document.createElement("div");
   card.classList.add("car-card", "dynamic", car.type);
-  // ADICIONA data-card-id para o favorites.js identificar
   card.dataset.cardId = String(car.id);
 
-  // --- PREÇO FORMATADO ---
   let preco = car.price;
   let precoFormatado;
   if (!isNaN(Number(preco))) {
     precoFormatado = Number(preco).toLocaleString("pt-BR");
   } else {
-    precoFormatado = preco; // mantém texto tipo "7M"
+    precoFormatado = preco;
   }
 
-  // --- HTML DO CARD ---
   card.innerHTML = `
         <div class="card-image">
             <div class="carousel-slides">
@@ -115,11 +104,9 @@ function createCarCard(car) {
         </div>
     `;
 
-  // --- Inicializa funcionalidades do card ---
   setupCarousel(card);
   setupFavoriteButton(card, car);
 
-  // Redireciona ao clicar em "Detalhes"
   const detalhesBtn = card.querySelector(".rent-btn");
   detalhesBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -129,7 +116,7 @@ function createCarCard(car) {
   return card;
 }
 
-// --- CAROUSEL ---
+// --- CAROUSEL (Mantida) ---
 function setupCarousel(card) {
   const slides = card.querySelectorAll(".slide-img");
   const prevBtn = card.querySelector(".prev-btn");
@@ -143,7 +130,6 @@ function setupCarousel(card) {
     slides.forEach((s, i) => s.classList.toggle("active", i === index));
   }
 
-  // Oculta botões se houver só uma imagem
   if (slides.length <= 1) {
     prevBtn.style.display = "none";
     nextBtn.style.display = "none";
@@ -162,7 +148,7 @@ function setupCarousel(card) {
   });
 }
 
-// --- FAVORITOS (por card, usando FAVORITES_KEY) ---
+// --- FAVORITOS (Mantida) ---
 function setupFavoriteButton(card, car) {
   const favBtn = card.querySelector(".favorite-btn");
   if (!favBtn) return;
@@ -172,7 +158,6 @@ function setupFavoriteButton(card, car) {
 
   let favoritos = JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
 
-  // Se já está favoritado, marca o botão
   const isFav = favoritos.some(f => String(f.id) === String(car.id));
   if (isFav) favBtn.classList.add("favorited");
 
@@ -183,13 +168,10 @@ function setupFavoriteButton(card, car) {
     const index = favoritos.findIndex(f => String(f.id) === String(car.id));
 
     if (index > -1) {
-      // REMOVE
       favoritos.splice(index, 1);
       favBtn.classList.remove("favorited");
-      // Note: 'showToast' deve ser definido em outro arquivo (ex: main.js)
       if (typeof showToast === "function") showToast(`${car.name} removido dos favoritos.`, "info");
     } else {
-      // ADICIONA
       favoritos.push({
         id: String(car.id),
         name: car.name,
@@ -198,7 +180,6 @@ function setupFavoriteButton(card, car) {
       });
 
       favBtn.classList.add("favorited");
-      // Note: 'showToast' deve ser definido em outro arquivo (ex: main.js)
       if (typeof showToast === "function") showToast(`${car.name} adicionado aos favoritos!`, "success");
     }
 
@@ -227,25 +208,28 @@ function closeSearchBar() {
 // FUNÇÕES DE CARREGAMENTO E BUSCA (INTEGRAÇÃO COM SUPABASE)
 // =========================================================================
 
-// --- FUNÇÃO PARA RENDERIZAR E LIMPAR O CONTAINER ---
+// --- FUNÇÃO PARA RENDERIZAR E LIMPAR O CONTAINER (SCROLL REMOVIDO) ---
 function renderizarCardsDeVeiculos(veiculos) {
-  // Limpa o conteúdo anterior
   cardContainer.innerHTML = '';
 
   if (veiculos.length === 0) {
     cardContainer.innerHTML = '<p style="text-align: center; width: 100%; padding: 20px; color: #ccc;">Nenhum veículo encontrado para este termo. 😔</p>';
-    return;
+  } else {
+    veiculos.forEach((car) => {
+      const card = createCarCard(car);
+      cardContainer.appendChild(card);
+    });
   }
 
-  // Cria e anexa os novos cards
-  veiculos.forEach((car) => {
-    const card = createCarCard(car);
-    cardContainer.appendChild(card);
-  });
+  // O SCROLL FOI REMOVIDO DESTA FUNÇÃO para ser controlado apenas no submit
 }
 
-// --- FUNÇÃO PARA CARREGAR TODOS OS VEÍCULOS (INICIALIZAÇÃO/RECARGA) ---
-async function loadCars() {
+// --- FUNÇÃO PARA BUSCAR TODOS OS VEÍCULOS (Retorna os dados) ---
+async function fetchAllCars() {
+  if (typeof supabase === 'undefined') {
+    console.error("Erro: Cliente Supabase não encontrado.");
+    return [];
+  }
   try {
     const { data, error } = await supabase
       .from("inventory_cars")
@@ -253,21 +237,26 @@ async function loadCars() {
       .order("id", { ascending: false });
 
     if (error) throw error;
-
-    // Renderiza todos os carros
-    renderizarCardsDeVeiculos(data);
-
+    return data;
   } catch (err) {
     console.error("Erro ao carregar veículos:", err.message);
     cardContainer.innerHTML = '<p style="text-align: center; width: 100%; padding: 20px; color: red;">Falha ao carregar veículos iniciais.</p>';
+    return [];
   }
 }
 
-// --- FUNÇÃO DE BUSCA NO SUPABASE (FILTRO) ---
-async function pesquisarVeiculosNoSupabase(termo) {
+// --- FUNÇÃO PARA BUSCAR TODOS OS VEÍCULOS E RENDERIZAR (Inicialização/Recarga) ---
+async function loadCars() {
+  const data = await fetchAllCars();
+  renderizarCardsDeVeiculos(data);
+}
+
+
+// --- FUNÇÃO PRINCIPAL DE BUSCA NO SUPABASE (Retorna os dados, não renderiza) ---
+async function fetchFilteredCars(termo) {
   if (typeof supabase === 'undefined') {
     console.error("Erro: Cliente Supabase não encontrado.");
-    return;
+    return [];
   }
 
   const termoBusca = termo.toLowerCase();
@@ -276,21 +265,30 @@ async function pesquisarVeiculosNoSupabase(termo) {
     const { data, error } = await supabase
       .from('inventory_cars')
       .select('*')
-      // Busca por nome OU marca (name.ilike OU brand.ilike)
       .or(`name.ilike.%${termoBusca}%,brand.ilike.%${termoBusca}%`);
 
     if (error) throw error;
-
-    // Renderiza apenas os carros filtrados
-    renderizarCardsDeVeiculos(data);
-
+    return data; // Retorna o array de veículos
   } catch (error) {
     console.error('Erro ao pesquisar veículos:', error.message);
-    cardContainer.innerHTML = '<p style="text-align: center; width: 100%; padding: 20px; color: red;">Erro ao executar a pesquisa.</p>';
+    return [];
   }
 }
 
-// --- FILTRO LATERAL (Mantido, mas agora interage com os cards renderizados) ---
+// --- FUNÇÃO PARA LIDAR COM A LÓGICA DE BUSCA (Live Search) ---
+async function handleLiveSearch(termo) {
+  const termoTratado = termo.trim();
+  if (termoTratado === "") {
+    await loadCars();
+    return;
+  }
+  // Live Search: Apenas renderiza, NÃO ROLA
+  const results = await fetchFilteredCars(termoTratado);
+  renderizarCardsDeVeiculos(results);
+}
+
+
+// --- FILTRO LATERAL (Mantido) ---
 function setupFilters() {
   const filterButtons = document.querySelectorAll(".filter-btn");
 
@@ -313,25 +311,10 @@ function setupFilters() {
 
 
 // =========================================================================
-// EVENT LISTENERS E INICIALIZAÇÃO (ATUALIZADO)
+// EVENT LISTENERS E INICIALIZAÇÃO
 // =========================================================================
 
-// --- FUNÇÃO PARA LIDAR COM A LÓGICA DE BUSCA ---
-function handleSearch(termo) {
-  const termoTratado = termo.trim();
-  if (termoTratado === "") {
-    // Se o campo for enviado vazio ou limpo, recarrega todos os veículos
-    loadCars();
-    return;
-  }
-  // Caso contrário, executa a busca filtrada
-  pesquisarVeiculosNoSupabase(termoTratado);
-}
-
-// Criando uma versão debounced da função de busca (aguarda 500ms antes de rodar)
-// Isso evita sobrecarregar o Supabase com muitas requisições rápidas.
-const debouncedSearch = debounce(handleSearch, 500);
-
+const debouncedLiveSearch = debounce(handleLiveSearch, 500);
 
 document.addEventListener("DOMContentLoaded", async () => {
   // A. LIMPEZA E CARREGAMENTO INICIAL
@@ -356,19 +339,42 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // C. NOVO: BUSCA EM TEMPO REAL NO EVENTO 'INPUT'
+  // C. BUSCA EM TEMPO REAL NO EVENTO 'INPUT'
   searchInput.addEventListener('input', (event) => {
-    // Chama a função debounced, que só executará a busca se o usuário
-    // parar de digitar por 500ms
-    debouncedSearch(event.target.value);
+    debouncedLiveSearch(event.target.value);
   });
 
 
-  // D. SUBMISSÃO DO FORMULÁRIO (MANTIDO PRINCIPALMENTE PARA ACESSIBILIDADE/ENTER)
-  searchForm.addEventListener('submit', (event) => {
+  // D. SUBMISSÃO DO FORMULÁRIO (REDIRECIONAMENTO DIRETO OU SCROLL)
+  searchForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    // Quando submetido explicitamente, executa a busca imediatamente, sem debounce.
-    handleSearch(searchInput.value);
+    const termo = searchInput.value.trim();
+
+    if (termo === "") {
+      await loadCars();
+      return;
+    }
+
+    // 1. Executa a busca imediatamente
+    const results = await fetchFilteredCars(termo);
+
+    // 2. Verifica a contagem de resultados
+    if (results.length === 1) {
+      // Se houver 1 resultado, redireciona diretamente
+      const carId = results[0].id;
+      console.log(`Redirecionando diretamente para o produto ID: ${carId}`);
+      window.location.href = `car-detail.html?id=${carId}`;
+    } else {
+      // Se houver 0 ou mais de 1 resultado: renderiza e ROLA
+      console.log(`Busca finalizada: ${results.length} resultados. Renderizando na página.`);
+      renderizarCardsDeVeiculos(results);
+
+      // 🚨 Rola a página APÓS a renderização (só acontece no submit/Enter)
+      if (cardContainer) {
+        cardContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    closeSearchBar();
   });
 });
