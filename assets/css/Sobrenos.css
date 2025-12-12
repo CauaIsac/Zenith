@@ -6,7 +6,7 @@
 :root {
     --primary-color: #dd0d0d;
     /* Azul primário (Bootstrap Blue) */
-    --blue-highlight: #e01111;
+    --red-highlight: #e01111;
     /* Azul ciano para destaque/ícones */
     --text-dark: #ad0d0d;
     /* Texto escuro */
@@ -20,11 +20,11 @@
 }
 
 .text-blue-highlight {
-    color: var(--blue-highlight) !important;
+    color: var(--red-highlight) !important;
 }
 
 .border-blue-highlight {
-    border-color: var(--blue-highlight) !important;
+    border-color: var(--red-highlight) !important;
 }
 
 /* Sombra e transição para cartões de valor */
@@ -80,6 +80,22 @@
     background-color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     /* Sombra suave */
+}
+
+.accordion-button{
+    border: none;
+    transition: transform 0.3s ease
+}
+
+.accordion-button:hover{
+    transform: translateY(-3px);
+}
+
+.accordion-button:focus,
+.accordion-button:active{
+ outline: none !important;
+ box-shadow: none !important;
+ background-color: #fff !important;
 }
 
 .accordion-button:not(.collapsed) {
