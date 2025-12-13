@@ -124,6 +124,36 @@
 
 /*====================================== RESPONSIVIDADE DA PAGINA DE DETALHES =============================================*/
 
+/* Tablets */
+@media (max-width: 1024px) {
+    .hero-brand-banner {
+        height: 50vh; 
+    }
+}
+
+/* Celulares (Igual ao banner da homepage) */
+@media (max-width: 768px) {
+    .hero-brand-banner {
+        /* A homepage usa altura menor no mobile para o conteúdo aparecer */
+        height: 45vh; 
+    }
+    
+    /* Garante que a imagem foque no centro do carro */
+    .hero-content img {
+        object-position: center;
+    }
+}
+
+/* Ajuste para telas muito pequenas */
+@media (max-width: 480px) {
+    .hero-brand-banner {
+        /* Mantendo similar à regra do banner da homepage */
+        height: 35vh; 
+    }
+}
+
+
+
 @media (max-width: 1100px) {
 
     /* Em telas menores que 1100px, o layout passa a ser de coluna única */

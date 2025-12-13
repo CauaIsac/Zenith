@@ -121,11 +121,11 @@ nav a {
 }
 
 .div__logo-zenith {
- transform: translateY(8px);
- transition: transform 0.3s ease;
- display: flex;
- justify-content: center;
- width: 100%;
+  transform: translateY(8px);
+  transition: transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .bi {
@@ -285,8 +285,6 @@ main {
   padding-top: var(--header-height);
   width: 100%;
   min-height: 100vh;
-  /* display: flex;
-  flex-direction: column; */
   box-sizing: border-box;
 }
 
@@ -882,45 +880,38 @@ span {
 
 /* Banner Principal da Marca */
 .hero-brand-banner {
-padding-top: 0;
-    margin-top: 0;
-    width: 100%;
+ width: 100vw;
+    /* Define uma altura padrão para Desktop (similar à visualização da home) */
+    height: 65vh; 
     
-    /* 1. Definir uma altura responsiva usando Viewport Height (vh) */
-    /* Para Desktop/Padrão: O banner ocupará 40% da altura visível da tela. */
-    height: 60vh; 
-    
-    /* Se a imagem for aplicada como background-image (melhor prática para banners): */
-    background-size: cover; 
-    background-position: center; /* Centraliza a imagem no container */
-    background-repeat: no-repeat;
-    
-    min-height: 200px; /* Garante uma altura mínima para telas muito grandes */
     position: relative;
     overflow: hidden;
+    
+    
+    /* CORREÇÃO CRUCIAL: Removemos a margem negativa. 
+       Agora ele respeita o padding-top do <main> igual à Homepage */
+    margin-top: 0; 
+    padding: 0;
+    
 }
 
 .hero-content {
- height: calc(100% - var(--header-height));
-    width: 100%; /* Garante que o conteúdo ocupe todo o banner */
-    
-    /* Centraliza QUALQUER conteúdo interno (texto, logo, etc.) */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    text-align: center;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 
 }
 
 .hero-content img {
- padding: 0;
-    width: 100%;
-    height: 100%; /* Força a imagem a ocupar a altura definida em .hero-brand-banner (40vh) */
-    
-    /* ESSENCIAL: Garante que a imagem preencha o espaço sem ser distorcida */
-    object-fit: cover; 
-    object-position: center;
+   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+ 
 }
 
 /* Seção Sobre a Marca */
@@ -1837,7 +1828,7 @@ body.menu-open .menu-toggle {
   /* O input preenche o espaço restante (250px - 32px do botão) */
   /* width: calc(100% - 32px); */
   transform: translateY(9px);
- 
+
   width: 20vw;
   height: 30px;
   background-color: transparent;
